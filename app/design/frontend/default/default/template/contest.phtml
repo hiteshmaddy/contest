@@ -1,0 +1,52 @@
+<div class="container-fluid contest">
+    <div class="container-inner">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" style="margin-top:10px;" id="contest">
+                <h1 class="text-center">Meet Sri Sri</h1>
+                <p class="text-center lead">Simply, drop in a question you would like him to address & win a Chance to meet Sri Sri!"</p>
+                <div class="col-md-8 col-sm-12 col-xs-12 bg-contest center-block" style="float:none;">
+                    <div class="col-md-12 col-sm-12 bg-form">
+                        <form class="form-inline" name="frmContest" method="post" id="frmContest" novalidate="novalidate">								 
+                            <?php
+                            if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                                $customer = Mage::getSingleton('customer/session')->getCustomer();
+                                $name = $customer->getName();
+                                $email = $customer->getEmail();
+                                $customerid = $customer->getId();
+                                $gender = $customer->getGender();
+                                $customer1 = Mage::getModel('customer/customer')->load($customerid);
+                                $customerAddress = array();
+                                foreach ($customer1->getAddresses() as $address) {
+                                    $customerAddress = $address->toArray();
+                                }
+                                $city = $customerAddress['city'];
+                                $state = $customerAddress['region'];
+                                $contactno = $customerAddress['telephone'];
+                                $postcode = $customerAddress['postcode'];
+                            }
+                            ?>
+                            <input type="hidden" value="<?php echo $name; ?>" name="Name" id="Name">
+                            <input type="hidden" value="<?php echo $email; ?>" name="Email" id="Email">                  
+                            <input type="hidden" value="<?php echo $gender; ?>" name="Gender" id="Gender">
+                            <input type="hidden" value="<?php echo $contactno; ?>" name="ContactNumber" id="ContactNumber">
+                            <input type="hidden" value="<?php echo $city; ?>" name="City" id="City">
+                            <input type="hidden" value="<?php echo $state; ?>" name="State" id="State">
+                            <input type="hidden" value="<?php echo $postcode; ?>" name="PinCode" id="PinCode">    
+                            <div class="form-group">
+                            
+                                <textarea id="input4" name="Question" class="form-control" rows="1" cols="35" placeholder="Please type your question here?"></textarea>
+                               
+                            </div>
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </form>
+                        <div class="contacterror"> You have already contested. </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 contactsuccess">
+                <h1 class="text-center">Thank you for writing to us! </h1>
+                <p class="text-center lead">We will get back to you shortly.</p>                       
+            </div>
+        </div>
+    </div>
+</div>

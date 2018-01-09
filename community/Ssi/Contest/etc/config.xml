@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<config>
+    <!-- Module Version -->
+    <modules>
+        <Ssi_Contest>
+            <version>0.1.0</version>
+        </Ssi_Contest>
+    </modules>
+    <!-- Front End Router & Layout Update -->
+    <frontend>
+        <routers>
+            <contest>
+                <use>standard</use>
+                <args>
+                    <module>Ssi_Contest</module>
+                    <frontName>contest</frontName>
+                </args>
+            </contest>
+        </routers>
+        <layout>
+            <updates>
+                <contest>
+                    <file>contest.xml</file>
+                </contest>
+            </updates>
+        </layout>      
+    </frontend>
+    <!-- Admin Router -->
+    <admin>
+        <routers>
+            <contest>
+                <use>admin</use>
+                <args>
+                    <module>Ssi_Contest</module>
+                    <frontName>contest</frontName>
+                </args>
+            </contest>
+        </routers>
+    </admin>
+    <!-- Admin Structure layout -->
+    <adminhtml> 
+        <layout>
+            <updates>
+                <contest>
+                    <file>contest/contest.xml</file>
+                </contest>
+            </updates>
+        </layout>
+    </adminhtml>
+    <!-- Global  -->   
+    <global>
+        <!-- DefineModel class & resource model -->
+        <models>
+            <contest>
+                <class>Ssi_Contest_Model</class>
+                <resourceModel>contest_mysql4</resourceModel>
+            </contest>           
+            <contest_mysql4>
+                <class>Ssi_Contest_Model_Mysql4</class>
+                <entities>
+                    <contest>
+                        <table>contest</table>
+                    </contest>
+                </entities>
+            </contest_mysql4>
+        </models>
+        <!-- Resource Setup -->
+        <resources>
+            <contest_setup>
+                <setup>
+                    <module>Ssi_Contest</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </contest_setup>
+            <contest_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </contest_write>
+            <contest_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </contest_read>
+        </resources>
+        <!-- Define Block -->
+        <blocks>
+            <contest>
+                <class>Ssi_Contest_Block</class>
+            </contest>
+        </blocks>
+        <!-- Define Helper -->
+        <helpers>
+            <contest>
+                <class>Ssi_Contest_Helper</class>
+            </contest>
+        </helpers>
+        <events>
+            <customer_login>
+                <observers>
+                    <contest_customer_login>
+                        <type>singleton</type>
+                        <class>contest/observer</class>
+                        <method>customerLogin</method>
+                    </contest_customer_login>
+                </observers>
+            </customer_login>        
+            <customer_register_success>
+                <observers>
+                    <contest_observer>
+                        <type>singleton</type>
+                        <class>contest/observer</class>
+                        <method>customerRegisterSuccess</method>
+                    </contest_observer>
+                </observers>
+            </customer_register_success>
+        </events>
+    </global>
+</config>

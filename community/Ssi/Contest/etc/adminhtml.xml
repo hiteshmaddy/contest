@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adminhtml>
+        <!-- Add Item in main menu -->
+        <menu>
+            <contest module="contest">
+                <title>Ssi</title>
+                <sort_order>75</sort_order>               
+                <children>
+                    <items module="contest">
+                        <title>Contest</title>
+                        <sort_order>0</sort_order>
+                        <action>contest/adminhtml_contest</action>
+                    </items>               
+                </children>
+            </contest>
+        </menu>
+        <!-- ACL for module -->
+        <acl>
+            <resources>
+                <admin>  <!--This is acl based on URL. If you see URL it would be /admin/system_config/ -->
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <contest translate="title" module="contest">  <!-- This is name of the section created by us -->
+                                            <title>Contest Module</title>  <!-- Title as shown in User->Roles->Permissions Window -->
+                                            <sort_order>10</sort_order>
+                                        </contest>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>       
+    </adminhtml>
